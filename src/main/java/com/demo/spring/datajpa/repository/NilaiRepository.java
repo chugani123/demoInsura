@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.spring.datajpa.model.Nilai;
 
@@ -16,7 +17,7 @@ public interface NilaiRepository extends JpaRepository<Nilai, Long> {
 	List<Nilai> findByPelajaranContaining(String pelajaran);
 	List<Nilai> findByNilaiContaining(String nilai);
 	
-	@Query("delete from Nilai where pelajaran = :pelajaran")
-	void deleteByPelajaran(@Param("pelajaran") String pelajaran);
+	@Transactional
+	void deleteByPelajaran(String pelajaran);
 		
 }

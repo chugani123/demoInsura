@@ -56,6 +56,7 @@ public class MainController {
 			
 			if (filter == null) {
 				siswaRepository.findAll().forEach(siswa::add);
+				useBean = "siswa";
 			}else {
 				if (filter.equals("noInduk") && input != null ) {
 					siswaRepository.findByNoIndukContaining(input).forEach(siswa::add);
@@ -83,10 +84,10 @@ public class MainController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 			
-			if (!useBean.equals("siswa") || useBean.equals("nilai")) {
+			if (!(useBean.equals("siswa") || useBean.equals("nilai"))) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}else {
-				if (useBean.equals(siswa)) {
+				if (useBean.equals("siswa")) {
 					return new ResponseEntity<>(siswa, HttpStatus.OK);
 				}else {
 					return new ResponseEntity<>(nilai, HttpStatus.OK);
